@@ -24,6 +24,10 @@ config/name="Flashback"
 run/main_scene="res://levels/level_test.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://misc/globals.gd"
+
 [display]
 
 window/size/width=682

@@ -1,0 +1,3 @@
+extends Node
+
+enum ENTITY_TYPES{ENEMY,OBJECT,PLAYER}

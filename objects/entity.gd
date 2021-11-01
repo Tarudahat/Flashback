@@ -1,7 +1,7 @@
 class_name Entity
 extends KinematicBody2D
 
-export var hp:int = 100
+export var hp:int = 1000
 export var dmg:int = 50
 
 export var disappear_on_death:bool = true
@@ -9,6 +9,7 @@ export var knock_back:bool = false
 export var immortal:bool = false
 export var movement_speed:int = 125
 export var ENTITY_WEIGHT:int = 75
+export var ENTITY_TYPE:int = Globals.ENTITY_TYPES.ENEMY
 
 var max_hp:int = hp
 
