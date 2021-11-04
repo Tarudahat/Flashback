@@ -7,12 +7,10 @@
 [ext_resource path="res://assets/objects/magic_stick.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 43, 42 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 43, 0, 43, 42 )
 
@@ -25,19 +23,20 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15.3349, 19.162 )
+extents = Vector2( 14.5204, 15.8742 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 collision_mask = 3
 script = ExtResource( 2 )
 disappear_on_death = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.13319, -0.117985 )
+position = Vector2( 2.62204, 3.09026 )
 shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -6,7 +6,7 @@ var jumping:bool = false
 var jump_velocity:Vector2
 var MAXJUMPY:int = 775
 var looking_dir:int
-var timers:Dictionary = {"rewind_timer":0,"blast_start_timer":0,"blast_timer":0,"no_stick_timer":0}
+var timers:Dictionary = {"rewind_timer":0,"blast_start_timer":0,"blast_timer":0,"no_stick_timer":0,"no_floor_timer":0}
 var blast_power:int
 
 var blast = load("res://objects/player/blast.tscn")
@@ -17,7 +17,7 @@ func _ready():
 	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
 	movement_speed=150
 
-func _process(_delta):
+func _process(delta):
 	#movement
 	velocity = Vector2(0,0)
 
@@ -39,14 +39,16 @@ func _process(_delta):
 				jumping = true
 		else:
 			jumping=false
+		timers["no_floor_timer"]=0
 	else:
-		velocity.y += ENTITY_WEIGHT*4
+		timers["no_floor_timer"]+=delta*25
+		velocity.y += ENTITY_WEIGHT*4+timers["no_floor_timer"]
 
 	if jumping:
 		if is_on_ceiling():
 			jump_velocity.y -= 250
 		velocity.y -= jump_velocity.y
-		jump_velocity.y -= 25
+		jump_velocity.y -= 26
 		if jump_velocity.y<0:
 			jumping=false	
 			jump_velocity.y=0				
@@ -84,36 +86,39 @@ func _process(_delta):
 		player_positions.remove(0)
 
 	#BLASTING
-	if Input.is_action_just_pressed("in_shoot"):
-		timers["blast_start_timer"] =OS.get_system_time_msecs()
-		timers["no_stick_timer"]=0
-		$staff.visible=true
+	if OS.get_system_time_msecs() >= timers["blast_timer"]:
+		if Input.is_action_just_pressed("in_shoot"):
+			timers["blast_start_timer"] =OS.get_system_time_msecs()
+			timers["no_stick_timer"]=0
+			$staff.visible=true
 
+		if Input.is_action_just_released("in_shoot"):
+			var new_blast = blast.instance()
+			new_blast.dmg = dmg
+			new_blast.blast_power = blast_power
+			#this beautiful line makes the blasts appear on the end of the staff
+			new_blast.position = (position+$staff.position)+(get_local_mouse_position().normalized()*32)
+			new_blast.target_position = get_local_mouse_position()
+			get_parent().add_child(new_blast)
+			damage(blast_power*15)
+			timers["no_stick_timer"] = OS.get_system_time_msecs()+1350
+			timers["blast_timer"] = OS.get_system_time_msecs()+200
+			timers["blast_start_timer"] = OS.get_system_time_msecs()
+		
 	if Input.is_action_pressed("in_shoot"): 
 		$staff.look_at(get_local_mouse_position()*500)
 		blast_power = 1
 		if OS.get_system_time_msecs() >= timers["blast_start_timer"]+750:
 			blast_power = 2
-		if OS.get_system_time_msecs() >= timers["blast_start_timer"]+1200:
+		if OS.get_system_time_msecs() >= timers["blast_start_timer"]+1300:
 			blast_power = 4
 	else:
 		if timers["no_stick_timer"]>0:
 			if OS.get_system_time_msecs() >= timers["no_stick_timer"]:
 				$staff.visible=false
-				timers["no_stick_timer"]=0
-					
-	if Input.is_action_just_released("in_shoot") and OS.get_system_time_msecs() >= timers["blast_timer"]:
-		var new_blast = blast.instance()
-		new_blast.dmg = dmg
-		new_blast.blast_power = blast_power
-		#this beautiful line makes the blasts appear on the end of the staff
-		new_blast.position = (position+$staff.position)+(get_local_mouse_position().normalized()*32)
-		new_blast.target_position = get_local_mouse_position()
-		get_parent().add_child(new_blast)
-		damage(blast_power*15)
-		timers["no_stick_timer"] = OS.get_system_time_msecs()+1350
-		timers["blast_timer"] = OS.get_system_time_msecs()+200
-
+				timers["no_stick_timer"]=OS.get_system_time_msecs()
+						
+	
 	match looking_dir:
 		0:
 			$staff.position = Vector2(17,0)
