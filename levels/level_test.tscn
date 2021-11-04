@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://objects/level_objects/door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/level_objects/switch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/level_objects/blast_reflector.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
 
@@ -28,12 +29,27 @@ position = Vector2( 192, 144 )
 "Switches",
 ] instance=ExtResource( 4 )]
 position = Vector2( 72, 176 )
+rewind_switch = true
 
 [node name="Door" parent="Objects/Switches/Switch" instance=ExtResource( 3 )]
-position = Vector2( -32, 112 )
-
-[node name="Door3" parent="Objects/Switches/Switch" instance=ExtResource( 3 )]
-position = Vector2( 0, 112 )
+position = Vector2( 120, -112 )
+inverted_open = true
 
 [node name="Door2" parent="Objects/Switches/Switch" instance=ExtResource( 3 )]
 position = Vector2( -64, 112 )
+
+[node name="Reflectors" type="Node2D" parent="Objects"]
+
+[node name="Reflector2" parent="Objects/Reflectors" groups=[
+"Reflectors",
+] instance=ExtResource( 5 )]
+position = Vector2( 488, 1.52588e-05 )
+rotation = -2.35619
+scale = Vector2( 1, 1 )
+
+[node name="Reflector" parent="Objects/Reflectors" groups=[
+"Reflectors",
+] instance=ExtResource( 5 )]
+position = Vector2( 488, 96 )
+rotation = -0.785398
+scale = Vector2( 1, 1 )

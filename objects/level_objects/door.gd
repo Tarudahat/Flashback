@@ -1,30 +1,34 @@
 extends KinematicBody2D
 
-export var inverted_active:bool = false
-export var movement_speed:int = 5
-var active_:bool = false
-var start_position:Vector2 = get_global_position()
-export var open_height:int = start_position.y-50
-var prev_active:bool
-var target_height:float
+var target_height:float 
+var active_:bool
+onready var start_height:float = position.y
+var opening_height:float = 75
+export var inverted_open:bool = false
+export var movement_speed:int = 450
 var velocity:Vector2
+onready var start_x:float = position.x
 
 func _process(_delta):
-	active_ = get_parent().active_
-	if inverted_active:
-		active_ = Globals.switch_bool(get_parent().active_)
+	velocity=Vector2(0,0)
 
-	if active_ != prev_active:
-		match active_:
-			true:
-				target_height = open_height
-				velocity = Vector2(0,-1)
-			false:
-				target_height = start_position.y
-				velocity = Vector2(0,1)
-				
+	active_=get_parent().active_
+	if inverted_open:
+		active_=Globals.switch_bool(get_parent().active_)
+	match active_:
+		false:
+			target_height=start_height
+			velocity=Vector2(0,1)
+		true:
+			target_height=start_height-opening_height
+			velocity=Vector2(0,-1)
 
-	if (get_global_position().y>=target_height and velocity.y<0) or (get_global_position().y<=target_height and velocity.y>0):
-		move_and_slide(velocity*movement_speed,Vector2.UP)
-				
-	prev_active = active_
+	if (velocity.y == -1 and position.y>target_height) or (velocity.y == 1 and position.y<target_height):
+		velocity = move_and_slide(velocity*movement_speed)
+
+
+func _physics_process(_delta):
+	position.x=start_x
+	
+
+	

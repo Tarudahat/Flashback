@@ -4,10 +4,11 @@ var player_positions:PoolVector3Array#save positions and looking direction
 var velocity:Vector2
 var jumping:bool = false
 var jump_velocity:Vector2
-var MAXJUMPY:int = 775
+var JUMP_POWER:int = 385
 var looking_dir:int
 var timers:Dictionary = {"rewind_timer":0,"blast_start_timer":0,"blast_timer":0,"no_stick_timer":0,"no_floor_timer":0}
 var blast_power:int
+var rewinding:bool = false
 
 var blast = load("res://objects/player/blast.tscn")
 
@@ -16,51 +17,38 @@ func _ready():
 	$PlayerUI_canvas/PlayerUI_controle.visible=true
 	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
 	movement_speed=150
+	Globals.player_node = self
 
 func _process(delta):
 	#movement
-	velocity = Vector2(0,0)
+	velocity.x = 0
 
 	if Input.is_action_pressed("in_left"):
-		velocity.x -= 1
+		velocity.x -= 1*movement_speed
 		$AnimatedSprite.flip_h=true
 		looking_dir=1
 	if Input.is_action_pressed("in_right"):
-		velocity.x += 1
+		velocity.x += 1*movement_speed
 		$AnimatedSprite.flip_h=false
 		looking_dir=0
 
-	velocity=velocity.normalized()*movement_speed
-	#jumping and gravity (super trash)
-	if is_on_floor():
-		if !jumping:
-			if Input.is_action_pressed("in_jump"):
-				jump_velocity.y = MAXJUMPY
-				jumping = true
-		else:
-			jumping=false
-		timers["no_floor_timer"]=0
-	else:
-		timers["no_floor_timer"]+=delta*25
-		velocity.y += ENTITY_WEIGHT*4+timers["no_floor_timer"]
+	#jumping and gravity (fixed)
+	if velocity.y<=3500:
+		velocity.y += ENTITY_WEIGHT*Globals.gravity*delta
 
-	if jumping:
-		if is_on_ceiling():
-			jump_velocity.y -= 250
-		velocity.y -= jump_velocity.y
-		jump_velocity.y -= 26
-		if jump_velocity.y<0:
-			jumping=false	
-			jump_velocity.y=0				
+	if is_on_floor() and Input.is_action_pressed("in_jump"):
+		velocity.y=-JUMP_POWER
 	
 	#rewinding		
+	rewinding=false
 	if Input.is_action_just_pressed("in_rewind"):
 		player_positions.invert()
+		rewinding=true
 	if Input.is_action_just_released("in_rewind"):
 		timers["rewind_timer"] = OS.get_system_time_secs()+3
 		if player_positions.size()>=1:
 			player_positions.resize(0)
-		$CollisionShape2D.disabled=false
+		$CollisionPolygon2D.disabled=false
 	
 	if Input.is_action_pressed("in_rewind") and OS.get_system_time_secs() >= timers["rewind_timer"]:
 		if player_positions.size()>0:
@@ -75,9 +63,9 @@ func _process(delta):
 		else:
 			timers["rewind_timer"] = OS.get_system_time_secs()+3
 	
-		$CollisionShape2D.disabled=true
+		$CollisionPolygon2D.disabled=true
 	else:
-		$CollisionShape2D.disabled=false
+		$CollisionPolygon2D.disabled=false
 		velocity = move_and_slide(velocity, Vector2.UP)
 		if OS.get_system_time_secs() >= timers["rewind_timer"]:
 			player_positions.append(Vector3(position.x,position.y,looking_dir))
