@@ -10,3 +10,11 @@ func switch_bool(input_bool):
             return false
         false:
             return true
+
+#needs improvements
+func is_in_name(search_name,node_name):
+    if search_name in node_name:
+        if search_name+"_" in node_name:
+            return false
+        else:
+            return true

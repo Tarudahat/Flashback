@@ -16,9 +16,6 @@ var max_hp:int = hp
 var prev_hp:int
 var knock_back_timer:int 
 
-func damage(input_dmg):
-	hp -= input_dmg
-
 func _process(_delta):
 	#cap hp
 	if immortal:
@@ -30,7 +27,7 @@ func _process(_delta):
 		hp=0
 
 	if prev_hp > hp and knock_back:
-		print("got hit")
+		print("Entity,",self.name," damaged: ",prev_hp-hp)
 		#bad code VVVVV 
 		#get_child(1).emitting = true
 		

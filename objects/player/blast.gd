@@ -45,10 +45,10 @@ func _process(_delta):
 						queue_free()
 					elif collision.collider is StaticBody2D:
 						var collided_object = collision.collider
-						if collided_object.is_in_group("Switches") and collided_object.get_child_count()>0:
+						if Globals.is_in_name("Switch",collided_object.name) and collided_object.get_child_count()>0:
 							collided_object.active_=Globals.switch_bool(collided_object.active_)
 							queue_free()
-						elif collided_object.is_in_group("Reflectors"):
+						elif Globals.is_in_name("Reflector",collided_object.name):
 							target_position=target_position.bounce(collision.normal)
 							skip_rest_collisions=true
 					else:
