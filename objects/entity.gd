@@ -1,7 +1,7 @@
 class_name Entity
 extends KinematicBody2D
 
-export var hp:int = 1000
+export var hp:int = 350
 export var dmg:int = 50
 
 export var disappear_on_death:bool = true

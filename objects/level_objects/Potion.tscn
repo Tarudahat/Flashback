@@ -8,10 +8,11 @@
 shader = ExtResource( 2 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 16.0
+radius = 11.1167
 
 [node name="Potion" type="Sprite"]
 material = SubResource( 1 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
 

@@ -18,6 +18,8 @@ func _ready():
 	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
 	movement_speed=150
 	Globals.player_node = self
+	hp = 1000
+	max_hp = hp
 
 func _process(delta):
 	#movement
@@ -41,9 +43,10 @@ func _process(delta):
 	
 	#rewinding		
 	rewinding=false
-	if Input.is_action_just_pressed("in_rewind"):
+	if Input.is_action_just_pressed("in_rewind") and OS.get_system_time_secs() >= timers["rewind_timer"]:
 		player_positions.invert()
 		rewinding=true
+
 	if Input.is_action_just_released("in_rewind"):
 		timers["rewind_timer"] = OS.get_system_time_secs()+3
 		if player_positions.size()>=1:
@@ -112,7 +115,6 @@ func _process(delta):
 			$staff.position = Vector2(17,0)
 		1:
 			$staff.position = Vector2(-17,0)
-
 
 	#update hp-bar
 	$PlayerUI_canvas/PlayerUI_controle/HPbar.value = hp

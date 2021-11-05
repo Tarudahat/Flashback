@@ -29,6 +29,7 @@ disappear_on_death = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -71,5 +72,6 @@ texture = ExtResource( 5 )
 offset = Vector2( 10, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, 13.8929 )
+position = Vector2( -4.54777, 13.8929 )
+scale = Vector2( 1.14911, 0.977109 )
 polygon = PoolVector2Array( -0.00831699, -25.5336, -8.00586, -23.9902, -8, 5.21662, 16, 5.21662, 15.9868, -24.2708 )
