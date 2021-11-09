@@ -26,8 +26,8 @@ radius = 8.0
 radius = 21.1699
 
 [node name="Hand_enemy" type="KinematicBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

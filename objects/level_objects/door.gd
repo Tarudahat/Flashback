@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+#clean this code please
+
 var target_height:float 
 var active_:bool
 onready var start_height:float = position.y
@@ -25,10 +27,12 @@ func _process(_delta):
 
 	if (velocity.y == -1 and position.y>target_height) or (velocity.y == 1 and position.y<target_height):
 		velocity = move_and_slide(velocity*movement_speed)
-
+	else:#fix overshoots
+		position.y=target_height
 
 func _physics_process(_delta):
 	position.x=start_x
+	
 	
 
 	
