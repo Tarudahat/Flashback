@@ -16,31 +16,25 @@ var max_hp:int = hp
 var prev_hp:int
 var knock_back_timer:int 
 
-func _process(_delta):
-	#cap hp
-	if immortal:
-		hp = max_hp
 
-	if hp > max_hp:
-		hp = max_hp
-	if hp <= 0:
-		hp=0
+func damage(dmg_amount):
+	if !immortal and knock_back_timer<=OS.get_system_time_secs():
 
-	if prev_hp > hp and knock_back:
-		print("Entity,",self.name," damaged: ",prev_hp-hp)
-		#bad code VVVVV 
-		#get_child(1).emitting = true
+		hp-=dmg_amount
 		
-		knock_back_timer = OS.get_system_time_secs()+1
+		if hp > max_hp:
+			hp = max_hp
+		if hp <= 0:
+			hp=0
 
-	if hp <= 0 and disappear_on_death:
-		queue_free()
+		if prev_hp > hp and knock_back:
+			print("Entity,",self.name," damaged: ",prev_hp-hp)
+			#bad code VVVVV 
+			#get_child(1).emitting = true
+			
+			knock_back_timer = OS.get_system_time_secs()+2
+		
+		prev_hp = hp
 
-	prev_hp = hp
-
-
-
-func _physics_process(_delta):
-	#knock-back stuff
-	if knock_back_timer >= OS.get_system_time_secs():
-		hp = prev_hp
+		if hp <= 0 and disappear_on_death:
+			queue_free()

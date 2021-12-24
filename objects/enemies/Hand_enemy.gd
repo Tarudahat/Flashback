@@ -9,10 +9,10 @@ func _ready():
 
 func _process(delta):
 	for boi in bodies:
-		#have fun future with reading this shit, tip: "Vector2(0,-50)" is there bc the normal position was in the air making the player unable to jump
+		#have fun future me with reading this shit, tip: "Vector2(0,-50)" is there bc the normal position was in the air making the player unable to jump
 		boi.move_and_slide(((position-Vector2(0,-50))-boi.position).normalized()*grab_power*(((boi.position-position).length())/22.5),Vector2.UP)
 		if timer>=2.5:
-			boi.hp -= dmg
+			Globals.player_node.damage(dmg)
 			timer = 0
 			
 	timer+=delta

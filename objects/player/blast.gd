@@ -39,7 +39,7 @@ func _process(_delta):
 					if collision.collider is Entity:
 						if collision.collider.ENTITY_TYPE == Globals.ENTITY_TYPES.ENEMY:
 							var collided_object = collision.collider
-							collided_object.hp-=dmg*blast_power
+							collided_object.damage(dmg*blast_power)
 							queue_free()
 					elif collision.collider is TileMap:
 						queue_free()

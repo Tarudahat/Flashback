@@ -56,7 +56,7 @@ func _process(delta):
 	if Input.is_action_pressed("in_rewind") and OS.get_system_time_secs() >= timers["rewind_timer"]:
 		if player_positions.size()>0:
 			position=Vector2(player_positions[0].x,player_positions[0].y)
-			hp -= 1
+			damage(1)
 			match player_positions[0].z:
 				0.0:
 					$AnimatedSprite.flip_h=false
@@ -91,7 +91,7 @@ func _process(delta):
 			new_blast.position = (position+$staff.position)+(get_local_mouse_position().normalized()*32)
 			new_blast.target_position = get_local_mouse_position()
 			get_parent().add_child(new_blast)
-			hp -= blast_power*15
+			damage(blast_power*15)
 			timers["no_stick_timer"] = OS.get_system_time_msecs()+1350
 			timers["blast_timer"] = OS.get_system_time_msecs()+200
 			timers["blast_start_timer"] = OS.get_system_time_msecs()
