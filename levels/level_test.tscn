@@ -1,16 +1,32 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://objects/level_objects/door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/level_objects/switch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/level_objects/blast_reflector.tscn" type="PackedScene" id=5]
-[ext_resource path="res://objects/level_objects/Potion.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/level_objects/Item.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/enemies/Hand_enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/enemies/Slime_enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/enemies/spinning_blade.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/tileset/backdrop.png" type="Texture" id=10]
+[ext_resource path="res://objects/enemies/Pumpkin_enemy.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2( 0, -1 )
+color = Color( 0.360784, 0.329412, 0.329412, 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 0, -1 )
@@ -37,7 +53,7 @@ position = Vector2( 128, 208 )
 position = Vector2( 192, 176 )
 
 [node name="Door2" parent="Objects/Switches/Switch" instance=ExtResource( 3 )]
-position = Vector2( 160, 272 )
+position = Vector2( 91.443, 257.77 )
 
 [node name="Reflectors" type="Node2D" parent="Objects"]
 
@@ -56,17 +72,6 @@ rotation = -3.14159
 [node name="Reflector" parent="Objects/Reflectors" instance=ExtResource( 5 )]
 position = Vector2( 488, 96 )
 rotation = -0.785398
-
-[node name="Potions" type="Node2D" parent="Objects"]
-
-[node name="Potion" parent="Objects/Potions" instance=ExtResource( 6 )]
-position = Vector2( 48, 72 )
-
-[node name="Potion2" parent="Objects/Potions" instance=ExtResource( 6 )]
-position = Vector2( -96, 144 )
-
-[node name="Potion3" parent="Objects/Potions" instance=ExtResource( 6 )]
-position = Vector2( -16, 104 )
 
 [node name="Enemies" type="Node2D" parent="Objects"]
 
@@ -101,8 +106,23 @@ position = Vector2( 1040, 216 )
 position = Vector2( 1040, 120 )
 
 [node name="Slime_enemy" parent="Objects/Enemies" instance=ExtResource( 8 )]
-position = Vector2( 304, 56 )
+position = Vector2( 302.811, 56 )
+
+[node name="Pumpkin_enemy" parent="Objects/Enemies" instance=ExtResource( 11 )]
+position = Vector2( 263.574, 232.262 )
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( 192, 144 )
 knock_back = true
+
+[node name="Items" type="Node2D" parent="Objects"]
+
+[node name="Item" parent="Objects/Items" instance=ExtResource( 6 )]
+position = Vector2( -58.0655, 217.579 )
+
+[node name="Item2" parent="Objects/Items" instance=ExtResource( 6 )]
+position = Vector2( -61.4026, 152.172 )
+
+[node name="Item3" parent="Objects/Items" instance=ExtResource( 6 )]
+position = Vector2( 142.828, 272.307 )
+item_name = "Orb"

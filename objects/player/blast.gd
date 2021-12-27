@@ -15,12 +15,15 @@ func _ready():
 	match blast_power:
 		1:
 			$CollisionShape2D.shape.radius=5
+			$Light2D.texture_scale=0.5
 			$AnimatedSprite.play("small")
 		2:
 			$CollisionShape2D.shape.radius=10
+			$Light2D.texture_scale=0.7
 			$AnimatedSprite.play("medium")
 		4:
 			$CollisionShape2D.shape.radius=18
+			$Light2D.texture_scale=1
 			$AnimatedSprite.play("big")
 
 func _process(_delta):
@@ -39,7 +42,7 @@ func _process(_delta):
 					if collision.collider is Entity:
 						if collision.collider.ENTITY_TYPE == Globals.ENTITY_TYPES.ENEMY:
 							var collided_object = collision.collider
-							collided_object.damage(dmg*blast_power)
+							collided_object.damage(dmg*blast_power,true)
 							queue_free()
 					elif collision.collider is TileMap:
 						queue_free()

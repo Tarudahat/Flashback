@@ -17,4 +17,4 @@ func _process(delta):
 			velocity = (velocity.reflect(collision.normal)+collision.normal)
 		elif collision.collider is Entity:
 			if Globals.is_in_name("Player", collision.collider.name):
-				Globals.player_node.damage(dmg)
+				Globals.player_node.damage(dmg,true)

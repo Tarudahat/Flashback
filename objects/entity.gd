@@ -14,12 +14,17 @@ export var ENTITY_TYPE:int = Globals.ENTITY_TYPES.ENEMY #ENEMY=0, OBJECT=1, PLAY
 var max_hp:int = hp
 
 var prev_hp:int
-var knock_back_timer:int 
+var entity_timers: Dictionary = {"knock_back_timer":0,"flicker_timer":0}
 
+func _ready():
+	self.material = preload("res://objects/entity_material.tres").duplicate(true)
 
-func damage(dmg_amount):
-	if !immortal and knock_back_timer<=OS.get_system_time_secs():
+func damage(dmg_amount,respect_knockback):
+	if !immortal and (entity_timers["knock_back_timer"]<=OS.get_system_time_secs() or respect_knockback==false):
+		entity_timers["flicker_timer"] = OS.get_system_time_msecs()+250
 
+		if dmg_amount>0 and self!=Globals.player_node:
+			material.set_shader_param("should_flicker", true)
 		hp-=dmg_amount
 		
 		if hp > max_hp:
@@ -29,12 +34,13 @@ func damage(dmg_amount):
 
 		if prev_hp > hp and knock_back:
 			print("Entity,",self.name," damaged: ",prev_hp-hp)
-			#bad code VVVVV 
-			#get_child(1).emitting = true
-			
-			knock_back_timer = OS.get_system_time_secs()+2
+			entity_timers["knock_back_timer"] = OS.get_system_time_secs()+2
 		
 		prev_hp = hp
 
 		if hp <= 0 and disappear_on_death:
 			queue_free()
+
+func _process(_delta):
+	if entity_timers["flicker_timer"] <= OS.get_system_time_msecs():
+		material.set_shader_param("should_flicker", false)

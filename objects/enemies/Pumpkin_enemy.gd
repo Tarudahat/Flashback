@@ -28,7 +28,7 @@ func _process(delta):
 		for i in get_slide_count():
 			var collision = get_slide_collision(i)
 			if Globals.is_in_name("Player",collision.collider.name):
-				Globals.player_node.damage(dmg)
+				Globals.player_node.damage(dmg,true)
 		timers["dmg_timer"] = 0
 
 	timers["dmg_timer"]+=delta
