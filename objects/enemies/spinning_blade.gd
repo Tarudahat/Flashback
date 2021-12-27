@@ -14,7 +14,7 @@ func _process(delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider is TileMap:
-			velocity = (velocity.reflect(collision.normal)+collision.normal)
+			velocity = (velocity.reflect(collision.normal)+collision.normal*15)
 		elif collision.collider is Entity:
 			if Globals.is_in_name("Player", collision.collider.name):
 				Globals.player_node.damage(dmg,true)

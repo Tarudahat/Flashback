@@ -2,19 +2,20 @@ extends Sprite
 
 export var healing_amount:int = 50
 export var item_name:String = "Potion"
+var max_orbs:int = 0#letting the level node load first is pain
 
 func _ready():
 	texture = load("res://assets/objects/"+item_name+".png")
 	match item_name:
 		"Orb":
-			pass
+			max_orbs+=1
 
 func add_item(item_name_):
 	if item_name_ in Globals.player_node.inventory:
 		Globals.player_node.inventory[item_name_]+=1
 	else:
 		Globals.player_node.inventory[item_name_]=1
-	print(Globals.player_node.inventory)
+	Globals.current_level.max_orbs=max_orbs
 
 func _on_Area2D_body_entered(body):
 	if Globals.is_in_name("Player",body.name):

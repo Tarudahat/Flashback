@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tileset/backdrop.png" type="Texture" id=2]
+[ext_resource path="res://levels/level_node.gd" type="Script" id=3]
+[ext_resource path="res://assets/sound/BGM/slow_dark_drum.wav" type="AudioStream" id=4]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Static_map" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Static_map"]
+
+[node name="TextureRect" type="TextureRect" parent="Static_map/ParallaxBackground"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Static_map"]
+color = Color( 0.360784, 0.329412, 0.329412, 1 )
+
+[node name="TileMap" type="TileMap" parent="Static_map"]
+position = Vector2( 0, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_layer = 2
+collision_mask = 3
+format = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Static_map"]
+stream = ExtResource( 4 )
+volume_db = -2.5
+pitch_scale = 0.9
+autoplay = true
+mix_target = 1
+
+[node name="Objects" type="Node2D" parent="."]

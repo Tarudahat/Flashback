@@ -9,6 +9,7 @@ var looking_dir:int
 var timers:Dictionary = {"rewind_timer":0,"blast_start_timer":0,"blast_timer":0,"no_stick_timer":0,"no_floor_timer":0}
 var blast_power:int
 var rewinding:bool = false
+var rewinded:bool = false
 
 var inventory:Dictionary = {}
 
@@ -17,11 +18,12 @@ var blast = load("res://objects/player/blast.tscn")
 func _ready():
 	ENTITY_TYPE = Globals.ENTITY_TYPES.PLAYER
 	$PlayerUI_canvas/PlayerUI_controle.visible=true
-	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
 	movement_speed=150
 	Globals.player_node = self
 	hp = 1000
 	max_hp = hp
+	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
+
 
 func _process(delta):
 	#movement
@@ -45,9 +47,10 @@ func _process(delta):
 	
 	#rewinding		
 	rewinding=false
+	rewinded=false
 	if Input.is_action_just_pressed("in_rewind") and OS.get_system_time_secs() >= timers["rewind_timer"]:
+		rewinded=true
 		player_positions.invert()
-		rewinding=true
 
 	if Input.is_action_just_released("in_rewind"):
 		timers["rewind_timer"] = OS.get_system_time_secs()+3
@@ -56,6 +59,7 @@ func _process(delta):
 		$CollisionPolygon2D.disabled=false
 	
 	if Input.is_action_pressed("in_rewind") and OS.get_system_time_secs() >= timers["rewind_timer"]:
+		rewinding=true
 		if player_positions.size()>0:
 			position=Vector2(player_positions[0].x,player_positions[0].y)
 			damage(1,false)
@@ -94,6 +98,7 @@ func _process(delta):
 			new_blast.target_position = get_local_mouse_position()
 			get_parent().add_child(new_blast)
 			damage(blast_power*15,false)
+			blast_power=0
 			timers["no_stick_timer"] = OS.get_system_time_msecs()+1350
 			timers["blast_timer"] = OS.get_system_time_msecs()+200
 			timers["blast_start_timer"] = OS.get_system_time_msecs()

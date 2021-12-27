@@ -23,8 +23,10 @@ func damage(dmg_amount,respect_knockback):
 	if !immortal and (entity_timers["knock_back_timer"]<=OS.get_system_time_secs() or respect_knockback==false):
 		entity_timers["flicker_timer"] = OS.get_system_time_msecs()+250
 
-		if dmg_amount>0 and self!=Globals.player_node:
+		if dmg_amount>0:
 			material.set_shader_param("should_flicker", true)
+		if (Globals.player_node.blast_power!=0 or Globals.player_node.rewinding==true):
+			material.set_shader_param("should_flicker", false)
 		hp-=dmg_amount
 		
 		if hp > max_hp:
@@ -34,7 +36,7 @@ func damage(dmg_amount,respect_knockback):
 
 		if prev_hp > hp and knock_back:
 			print("Entity,",self.name," damaged: ",prev_hp-hp)
-			entity_timers["knock_back_timer"] = OS.get_system_time_secs()+2
+			entity_timers["knock_back_timer"] = OS.get_system_time_secs()+1
 		
 		prev_hp = hp
 
