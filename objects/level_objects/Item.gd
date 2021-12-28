@@ -8,6 +8,7 @@ func _ready():
 	texture = load("res://assets/objects/"+item_name+".png")
 	match item_name:
 		"Orb":
+			$Orb_particle.visible=true
 			max_orbs+=1
 
 func add_item(item_name_):

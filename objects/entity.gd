@@ -25,7 +25,7 @@ func damage(dmg_amount,respect_knockback):
 
 		if dmg_amount>0:
 			material.set_shader_param("should_flicker", true)
-		if (Globals.player_node.blast_power!=0 or Globals.player_node.rewinding==true):
+		if (self.name==Globals.player_node.name and Globals.player_node.blast_power!=0 or Globals.player_node.rewinding==true):
 			material.set_shader_param("should_flicker", false)
 		hp-=dmg_amount
 		

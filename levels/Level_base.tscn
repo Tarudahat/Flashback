@@ -22,7 +22,7 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Static_map"]
-color = Color( 0.360784, 0.329412, 0.329412, 1 )
+color = Color( 0.219608, 0.145098, 0.0941176, 1 )
 
 [node name="TileMap" type="TileMap" parent="Static_map"]
 position = Vector2( 0, 1 )
