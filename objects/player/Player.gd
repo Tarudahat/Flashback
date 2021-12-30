@@ -22,6 +22,7 @@ func _ready():
 	Globals.player_node = self
 	hp = 1000
 	max_hp = hp
+	
 	$PlayerUI_canvas/PlayerUI_controle/HPbar.max_value=max_hp
 
 
@@ -81,6 +82,16 @@ func _process(delta):
 
 	if player_positions.size()>=500:
 		player_positions.remove(0)
+
+	$PlayerUI_canvas/PlayerUI_controle/rewind_layer.visible=rewinding
+	if rewinding:
+		$PlayerUI_canvas/PlayerUI_controle/rewind_layer/main_clock/Sprite.rotate(-0.06)
+		$PlayerUI_canvas/PlayerUI_controle/rewind_layer/main_clock/Sprite2.rotate(-0.008)
+	else:
+		$PlayerUI_canvas/PlayerUI_controle/rewind_UI/Label.visible=false
+		if timers["rewind_timer"]-OS.get_system_time_secs()>0:
+			$PlayerUI_canvas/PlayerUI_controle/rewind_UI/Label.visible=true
+			$PlayerUI_canvas/PlayerUI_controle/rewind_UI/Label.text= str(timers["rewind_timer"]-OS.get_system_time_secs())
 
 	#BLASTING
 	if OS.get_system_time_msecs() >= timers["blast_timer"]:

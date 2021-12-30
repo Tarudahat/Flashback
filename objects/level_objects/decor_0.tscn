@@ -5,17 +5,17 @@
 [ext_resource path="res://assets/objects/light.png" type="Texture" id=3]
 [ext_resource path="res://assets/objects/chand_chain.png" type="Texture" id=4]
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 1.86418, 16.2146 )
-
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1.6876, 24.4524 )
+extents = Vector2( 1.86418, 16.2146 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32, 10.2453 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 1.6876, 24.4524 )
 
 [node name="Chand" type="Node2D"]
 
@@ -24,7 +24,7 @@ position = Vector2( -0.182884, -100.515 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
 position = Vector2( 0.182884, -3.48549 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="."]
 position = Vector2( 0.140305, -104 )
@@ -45,33 +45,12 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="chain"]
 position = Vector2( 0.0504761, 20.4068 )
 scale = Vector2( 1, 1.5 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 position = Vector2( 0.140305, -52.7557 )
 node_a = NodePath("../chain")
 node_b = NodePath("../chain2")
-
-[node name="chain2" type="RigidBody2D" parent="."]
-position = Vector2( 0, -96 )
-collision_layer = 2
-mass = 65535.0
-gravity_scale = 32.0
-
-[node name="Sprite" type="Sprite" parent="chain2"]
-position = Vector2( 0, 68.3765 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="chain2"]
-position = Vector2( 7.62939e-06, 67.0908 )
-shape = SubResource( 2 )
-
-[node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2( -0.157494, -4.62228 )
-node_a = NodePath("../chain2")
-node_b = NodePath("../main_part")
-bias = 0.9
 
 [node name="main_part" type="RigidBody2D" parent="."]
 collision_layer = 2
@@ -92,3 +71,24 @@ energy = 1.5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="main_part"]
 position = Vector2( 0, 10.2453 )
 shape = SubResource( 3 )
+
+[node name="chain2" type="RigidBody2D" parent="."]
+position = Vector2( 0, -96 )
+collision_layer = 2
+mass = 65535.0
+gravity_scale = 32.0
+
+[node name="Sprite" type="Sprite" parent="chain2"]
+position = Vector2( 0, 68.3765 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chain2"]
+position = Vector2( 7.62939e-06, 67.0908 )
+shape = SubResource( 4 )
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2( -0.157494, -4.62228 )
+node_a = NodePath("../chain2")
+node_b = NodePath("../main_part")
+bias = 0.9

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/objects/player.png" type="Texture" id=1]
 [ext_resource path="res://objects/player/Player.gd" type="Script" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://assets/UI/hp_bar_empty.png" type="Texture" id=4]
 [ext_resource path="res://assets/objects/magic_stick.png" type="Texture" id=5]
 [ext_resource path="res://assets/objects/light.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/flash_back.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/font/Abaddon Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/UI/clock.png" type="Texture" id=9]
+[ext_resource path="res://assets/UI/1x1.png" type="Texture" id=10]
+[ext_resource path="res://assets/UI/shift.png" type="Texture" id=11]
+[ext_resource path="res://assets/UI/flash_back_icon.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -22,6 +28,13 @@ animations = [ {
 "name": "default",
 "speed": 4.0
 } ]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 8 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 3
@@ -48,6 +61,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="rewind_UI" type="Sprite" parent="PlayerUI_canvas/PlayerUI_controle"]
+position = Vector2( 40, 381 )
+texture = ExtResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="PlayerUI_canvas/PlayerUI_controle/rewind_UI"]
+position = Vector2( 0, -32 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="PlayerUI_canvas/PlayerUI_controle/rewind_UI"]
+margin_left = -24.0
+margin_top = -56.0
+margin_right = 16.0
+margin_bottom = -1.99997
+custom_fonts/font = SubResource( 5 )
+text = "2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HPbar" type="TextureProgress" parent="PlayerUI_canvas/PlayerUI_controle"]
 margin_left = 8.0
 margin_top = 13.0
@@ -61,11 +94,43 @@ __meta__ = {
 }
 
 [node name="HPlabel" type="Label" parent="PlayerUI_canvas/PlayerUI_controle/HPbar"]
+modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_left = 72.2806
 margin_top = 5.89293
 margin_right = 184.281
 margin_bottom = 19.8929
+custom_fonts/font = SubResource( 4 )
 align = 1
+
+[node name="rewind_layer" type="TextureRect" parent="PlayerUI_canvas/PlayerUI_controle"]
+visible = false
+anchor_left = -0.000776722
+anchor_right = -0.000776722
+margin_left = -0.498655
+margin_top = 5.0
+margin_right = 681.501
+margin_bottom = 405.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="main_clock" type="Sprite" parent="PlayerUI_canvas/PlayerUI_controle/rewind_layer"]
+modulate = Color( 1, 1, 1, 0.109804 )
+position = Vector2( 341, 200 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="PlayerUI_canvas/PlayerUI_controle/rewind_layer/main_clock"]
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 10 )
+offset = Vector2( 12, -1 )
+
+[node name="Sprite2" type="Sprite" parent="PlayerUI_canvas/PlayerUI_controle/rewind_layer/main_clock"]
+rotation = -0.261799
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+offset = Vector2( 12, -1 )
 
 [node name="staff" type="Sprite" parent="."]
 visible = false

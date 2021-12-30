@@ -1,13 +1,14 @@
 extends Sprite
 
 export var healing_amount:int = 50
-export var item_name:String = "Potion"
+export(String) var item_name = "Potion"
 var max_orbs:int = 0#letting the level node load first is pain
 
 func _ready():
 	texture = load("res://assets/objects/"+item_name+".png")
 	match item_name:
 		"Orb":
+			$Light2D.energy=1.4
 			$Orb_particle.visible=true
 			max_orbs+=1
 
