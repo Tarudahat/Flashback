@@ -9,7 +9,6 @@ export var knock_back:bool = false
 export var immortal:bool = false
 export var movement_speed:int = 125
 export var ENTITY_WEIGHT:int = 75
-export var ENTITY_TYPE:int = Globals.ENTITY_TYPES.ENEMY #ENEMY=0, OBJECT=1, PLAYER=2
 
 var max_hp:int = hp
 

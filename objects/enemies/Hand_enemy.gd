@@ -4,9 +4,6 @@ var bodies:Array
 export var grab_power:float = 170
 var timer:float
 
-func _ready():
-	ENTITY_TYPE=Globals.ENTITY_TYPES.ENEMY
-
 func _process(delta):
 	for boi in bodies:
 		#have fun future me with reading this shit, tip: "Vector2(0,-50)" is there bc the normal position was in the air making the player unable to jump

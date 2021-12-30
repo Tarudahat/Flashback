@@ -29,17 +29,18 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 8 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 3
 script = ExtResource( 2 )
 disappear_on_death = false
+knock_back = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
@@ -75,7 +76,7 @@ margin_left = -24.0
 margin_top = -56.0
 margin_right = 16.0
 margin_bottom = -1.99997
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,7 +100,7 @@ margin_left = 72.2806
 margin_top = 5.89293
 margin_right = 184.281
 margin_bottom = 19.8929
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 align = 1
 
 [node name="rewind_layer" type="TextureRect" parent="PlayerUI_canvas/PlayerUI_controle"]

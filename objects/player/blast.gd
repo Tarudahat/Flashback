@@ -11,50 +11,50 @@ var blast_powers:Dictionary = {"SMALL":1,"MEDIUM":2,"BIG":4}
 var blast_power:int 
 
 func _ready():
-	target_position *= 5000
-	match blast_power:
-		1:
-			$CollisionShape2D.shape.radius=5
-			$Light2D.texture_scale=0.5
-			$AnimatedSprite.play("small")
-		2:
-			$CollisionShape2D.shape.radius=10
-			$Light2D.texture_scale=0.7
-			$AnimatedSprite.play("medium")
-		4:
-			$CollisionShape2D.shape.radius=18
-			$Light2D.texture_scale=1
-			$AnimatedSprite.play("big")
+    target_position *= 5000
+    match blast_power:
+        1:
+            $CollisionShape2D.shape.radius=5
+            $Light2D.texture_scale=0.5
+            $AnimatedSprite.play("small")
+        2:
+            $CollisionShape2D.shape.radius=10
+            $Light2D.texture_scale=0.7
+            $AnimatedSprite.play("medium")
+        4:
+            $CollisionShape2D.shape.radius=18
+            $Light2D.texture_scale=1
+            $AnimatedSprite.play("big")
 
 func _process(_delta):
 
-	look_at(target_position)
-	velocity=move_and_slide(target_position.normalized()*movement_speed)
+    look_at(target_position)
+    velocity=move_and_slide(target_position.normalized()*movement_speed)
 
-	skip_rest_collisions=false
-	for i in get_slide_count():
-		if skip_rest_collisions==false:
-			var collision = get_slide_collision(i)
-			if is_queued_for_deletion():
-				pass
-			else:
-				if !collision.collider == null:
-					if collision.collider is Entity:
-						if collision.collider.ENTITY_TYPE == Globals.ENTITY_TYPES.ENEMY:
-							var collided_object = collision.collider
-							collided_object.damage(dmg*blast_power,true)
-							queue_free()
-					elif collision.collider is TileMap:
-						queue_free()
-					elif collision.collider is StaticBody2D:
-						var collided_object = collision.collider
-						if Globals.is_in_name("Switch",collided_object.name) and collided_object.get_child_count()>0:
-							collided_object.active_=Globals.switch_bool(collided_object.active_)
-							queue_free()
-						elif Globals.is_in_name("Reflector",collided_object.name):
-							target_position=target_position.bounce(collision.normal)
-							skip_rest_collisions=true
-					else:
-						queue_free()
-				
+    skip_rest_collisions=false
+    for i in get_slide_count():
+        if skip_rest_collisions==false:
+            var collision = get_slide_collision(i)
+            if is_queued_for_deletion():
+                pass
+            else:
+                if !collision.collider == null:
+                    if collision.collider is Entity:
+                        if Globals.is_in_name("_enemy",collision.collider.name):
+                            var collided_object = collision.collider
+                            collided_object.damage(dmg*blast_power,true)
+                            queue_free()
+                    elif collision.collider is TileMap:
+                        queue_free()
+                    elif collision.collider is StaticBody2D:
+                        var collided_object = collision.collider
+                        if Globals.is_in_name("Switch",collided_object.name) and collided_object.get_child_count()>0:
+                            collided_object.active_=Globals.switch_bool(collided_object.active_)
+                            queue_free()
+                        elif Globals.is_in_name("Reflector",collided_object.name):
+                            target_position=target_position.bounce(collision.normal)
+                            skip_rest_collisions=true
+                    else:
+                        queue_free()
+                
 
