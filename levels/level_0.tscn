@@ -119,7 +119,6 @@ sign_text = "This is a test sign----------------------------------------------89
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( -408, 144 )
-knock_back = true
 
 [node name="Items" type="Node2D" parent="Objects"]
 

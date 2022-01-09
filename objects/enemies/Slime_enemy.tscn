@@ -27,6 +27,7 @@ height = 8.00088
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 1 )
+ENTITY_TYPE = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1, 1, 1, 0.784314 )

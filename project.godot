@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Flashback"
-run/main_scene="res://levels/level_1.tscn"
+run/main_scene="res://levels/level_2.tscn"
 config/icon="res://icon.png"
 
 [autoload]

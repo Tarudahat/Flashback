@@ -40,7 +40,7 @@ func _process(_delta):
             else:
                 if !collision.collider == null:
                     if collision.collider is Entity:
-                        if Globals.is_in_name("_enemy",collision.collider.name):
+                        if collision.collider.ENTITY_TYPE==collision.collider.ENTITY_TYPES.ENEMY:
                             var collided_object = collision.collider
                             collided_object.damage(dmg*blast_power,true)
                             queue_free()

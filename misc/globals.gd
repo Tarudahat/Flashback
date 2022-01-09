@@ -4,6 +4,7 @@ var gravity:float = 13
 var player_node:Node
 var current_level:Node
 
+
 func switch_bool(input_bool):
 	match input_bool:
 		true:

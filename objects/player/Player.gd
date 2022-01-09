@@ -1,7 +1,6 @@
 extends Entity
 
 var player_positions:PoolVector3Array#save positions and looking direction
-var velocity:Vector2
 var jumping:bool = false
 var jump_velocity:Vector2
 var JUMP_POWER:int = 385
@@ -10,6 +9,7 @@ var timers:Dictionary = {"rewind_timer":0,"blast_start_timer":0,"blast_timer":0,
 var blast_power:int
 var rewinding:bool = false
 var rewinded:bool = false
+var velocity:Vector2
 
 var inventory:Dictionary = {}
 
@@ -27,7 +27,7 @@ func _ready():
 
 func _process(delta):
     #movement
-    velocity.x = 0
+    velocity.x=0
 
     if Input.is_action_pressed("in_left"):
         velocity.x -= 1*movement_speed
@@ -38,10 +38,9 @@ func _process(delta):
         $AnimatedSprite.flip_h=false
         looking_dir=0
 
-    #jumping and gravity (fixed)
+    #jumping and gravity
     if velocity.y<=3500:
         velocity.y += ENTITY_WEIGHT*Globals.gravity*delta
-
     if (is_on_floor() and Input.is_action_pressed("in_jump")) and (TextBoxHandler.show_text_box_==false or TextBoxHandler.i==-1):
         velocity.y=-JUMP_POWER
     
@@ -116,11 +115,23 @@ func _process(delta):
     if Input.is_action_pressed("in_shoot"): 
         $staff.look_at(get_local_mouse_position()*500)
         blast_power = 1
+        $staff/staff_light.energy=1
+        $staff/Particles2D.scale=Vector2(1,1)
+        $staff/Particles2D.speed_scale=1
         if OS.get_system_time_msecs() >= timers["blast_start_timer"]+750:
             blast_power = 2
-        if OS.get_system_time_msecs() >= timers["blast_start_timer"]+1300:
+            $staff/staff_light.energy=2
+            $staff/Particles2D.scale=Vector2(1.5,1.5)
+            $staff/Particles2D.speed_scale=1.2
+        if OS.get_system_time_msecs() >= timers["blast_start_timer"]+1750:
             blast_power = 4
+            $staff/staff_light.energy=2.5
+            $staff/Particles2D.scale=Vector2(1.7,1.7)
+            $staff/Particles2D.speed_scale=1.4
     else:
+        $staff/staff_light.energy=1
+        $staff/Particles2D.scale=Vector2(1,1)
+        $staff/Particles2D.speed_scale=1
         if timers["no_stick_timer"]>0:
             if OS.get_system_time_msecs() >= timers["no_stick_timer"]:
                 $staff.visible=false

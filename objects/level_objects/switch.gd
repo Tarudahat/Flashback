@@ -9,8 +9,7 @@ func _ready():
         has_parent_switch=true
 
 func _process(_delta):
-    if has_parent_switch:
-        get_parent().active_=active_
+
     if rewind_switch:
         if Globals.player_node.rewinded:
             active_=Globals.switch_bool(active_)
