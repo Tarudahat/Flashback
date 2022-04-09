@@ -29,7 +29,8 @@ shape = SubResource( 2 )
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 4 )
 texture_scale = 0.7
-color = Color( 0.72549, 0.85098, 1, 1 )
+color = Color( 0.776471, 0.878431, 1, 1 )
+energy = 1.2
 mode = 2
 
 [node name="Orb_particle" type="Particles2D" parent="."]

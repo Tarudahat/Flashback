@@ -2,6 +2,8 @@ extends Node
 
 var gravity:float = 13
 var player_node:Node
+var player_node2:Node
+var co_op:bool 
 var current_level:Node
 
 

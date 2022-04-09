@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/objects/player.png" type="Texture" id=1]
 [ext_resource path="res://objects/player/Player.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/UI/shift.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/flash_back_icon.png" type="Texture" id=12]
 [ext_resource path="res://objects/level_objects/magic_particles.tres" type="Material" id=13]
+[ext_resource path="res://assets/objects/player2.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -22,12 +23,25 @@ region = Rect2( 0, 0, 43, 42 )
 atlas = ExtResource( 1 )
 region = Rect2( 43, 0, 43, 42 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 43, 42 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 14 )
+region = Rect2( 43, 0, 43, 42 )
+
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "player_2",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=4]
@@ -49,13 +63,13 @@ frames = SubResource( 3 )
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 0, -24 )
+offset = Vector2( 0, -16 )
 current = true
+limit_smoothed = true
 
 [node name="PlayerUI_canvas" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI_controle" type="Control" parent="PlayerUI_canvas"]
-visible = false
 margin_top = -5.0
 margin_right = 40.0
 margin_bottom = 35.0

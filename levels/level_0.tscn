@@ -117,6 +117,12 @@ position = Vector2( 331.279, 60.4949 )
 position = Vector2( -536, 160 )
 sign_text = "This is a test sign----------------------------------------------8949594948!\"·$%&/()(/&%·&/%(&%%·&·&/(ictxzdedtrfcgugygu"
 
+[node name="Sign2" parent="Objects" instance=ExtResource( 14 )]
+position = Vector2( -768, 168 )
+sign_text = "deez nuts"
+npc_name = "Glowing Orb"
+visible_npc = false
+
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( -408, 144 )
 
@@ -126,7 +132,7 @@ position = Vector2( -408, 144 )
 position = Vector2( -58.0655, 217.579 )
 
 [node name="Item2" parent="Objects/Items" instance=ExtResource( 6 )]
-position = Vector2( -61.4026, 152.172 )
+position = Vector2( -56, 152 )
 
 [node name="Item3" parent="Objects/Items" instance=ExtResource( 6 )]
 position = Vector2( -776.134, 178.701 )

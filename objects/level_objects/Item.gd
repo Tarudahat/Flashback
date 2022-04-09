@@ -23,7 +23,7 @@ func _on_Area2D_body_entered(body):
     if Globals.is_in_name("Player",body.name):
         match item_name:
             "Potion":
-                Globals.player_node.damage(healing_amount*-1,false)
+                body.damage(healing_amount*-1,false)
             "Orb":
                 add_item("Orb")
         queue_free()

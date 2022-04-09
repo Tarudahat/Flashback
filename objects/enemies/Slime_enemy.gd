@@ -37,7 +37,8 @@ func _process(delta):
 
         for i in get_slide_count():
             var collision = get_slide_collision(i)
-            if Globals.is_in_name("Player",collision.collider.name):
-                Globals.player_node.damage(dmg,true)
+            if collision.collider is Entity:
+                if collision.collider.ENTITY_TYPE==collision.collider.ENTITY_TYPES.PLAYER:
+                    collision.collider.damage(dmg,true)
 
     

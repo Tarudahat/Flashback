@@ -16,5 +16,5 @@ func _process(delta):
         if collision.collider is TileMap:
             velocity = (velocity.reflect(collision.normal)+collision.normal*15)
         elif collision.collider is Entity:
-            if Globals.is_in_name("Player", collision.collider.name):
-                Globals.player_node.damage(dmg,true)
+            if collision.collider.ENTITY_TYPE==collision.collider.ENTITY_TYPES.PLAYER:
+                collision.collider.damage(dmg,true)

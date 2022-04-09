@@ -9,7 +9,7 @@ func _process(delta):
         #have fun future me with reading this shit, tip: "Vector2(0,-50)" is there bc the normal position was in the air making the player unable to jump
         boi.move_and_slide(((position-Vector2(0,-50))-boi.position).normalized()*grab_power*(((boi.position-position).length())/22.5),Vector2.UP)
         if timer>=2.5:
-            Globals.player_node.damage(dmg,true)
+            boi.damage(dmg,true)
             timer = 0
             
     timer+=delta
