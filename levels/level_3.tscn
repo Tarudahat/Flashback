@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tileset/backdrop2.png" type="Texture" id=2]
+[ext_resource path="res://assets/sound/BGM/slow_dark_drum.wav" type="AudioStream" id=3]
+[ext_resource path="res://levels/level_themes/Level_theme_sky.gd" type="Script" id=4]
+[ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/level_objects/Item.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/level_objects/Gate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/ranged_spawner.gd" type="Script" id=13]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Static_map" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Static_map"]
+
+[node name="TextureRect" type="TextureRect" parent="Static_map/ParallaxBackground"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Static_map"]
+visible = false
+color = Color( 0.152941, 0.356863, 0.290196, 1 )
+
+[node name="TileMap" type="TileMap" parent="Static_map"]
+position = Vector2( 0, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_layer = 2
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 65546, 0, 262145, 65547, 0, 262147, 262142, 0, 1, 262143, 0, 2, 196614, 0, 262145, 196615, 0, 262147, 327678, 0, 65537, 327679, 0, 131080, 262144, 0, 2, 393214, 0, 262144, 393215, 0, 196615, 327680, 0, 131080, 327681, 0, 3, 327682, 0, 262147, 458751, 0, 262144, 393216, 0, 196608, 393217, 0, 196610, 458757, 0, 131072, 458760, 0, 131072, 524293, 0, 131074, 524296, 0, 131074, 589836, 0, 262145, 589837, 0, 262146, 589838, 0, 262147, 720898, 0, 262145, 720899, 0, 262146, 720900, 0, 262147, 720913, 0, 262145, 720914, 0, 262147, 851983, 0, 196609, 917518, 0, 196609, 1048582, 0, 1, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 2, 1114118, 0, 262144, 1114119, 0, 196615, 1114120, 0, 65536, 1114121, 0, 65536, 1114122, 0, 65536, 1114123, 0, 196616, 1114124, 0, 196610, 1179655, 0, 262144, 1179656, 0, 196608, 1179657, 0, 196608, 1179658, 0, 196608, 1179659, 0, 196610, 2424825, 0, 262145, 2424826, 0, 262146, 2424827, 0, 262146, 2424828, 0, 262146, 2424829, 0, 262146, 2424830, 0, 262147 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Static_map"]
+stream = ExtResource( 3 )
+volume_db = -2.5
+pitch_scale = 0.9
+mix_target = 1
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="Objects"]
+
+[node name="RangeSpawner" type="Node2D" parent="Objects/Enemies"]
+position = Vector2( 392, 128 )
+script = ExtResource( 13 )
+range_ = 300
+use_path = true
+object_path = "res://objects/enemies/cloud_enemy.tscn"
+
+[node name="RangeSpawner2" type="Node2D" parent="Objects/Enemies"]
+position = Vector2( 24, 24 )
+script = ExtResource( 13 )
+range_ = 420
+use_path = true
+object_path = "res://objects/enemies/cloud_enemy.tscn"
+
+[node name="ModNodes" type="Node2D" parent="Objects"]
+position = Vector2( 0, -1 )
+
+[node name="Level_objects" type="Node2D" parent="Objects/ModNodes"]
+position = Vector2( 0, 1 )
+
+[node name="Gate" parent="Objects/ModNodes/Level_objects" instance=ExtResource( 11 )]
+position = Vector2( -128, 1088 )
+need_orb = false
+
+[node name="Player" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( 216, 472 )
+
+[node name="Items" type="Node2D" parent="Objects"]
+
+[node name="Item" parent="Objects/Items" instance=ExtResource( 9 )]
+position = Vector2( 112, 312 )

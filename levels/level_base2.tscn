@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/tileset/backdrop2.png" type="Texture" id=1]
+[ext_resource path="res://assets/sound/BGM/slow_dark_drum.wav" type="AudioStream" id=2]
+[ext_resource path="res://levels/level_themes/Level_theme_sky.gd" type="Script" id=3]
+[ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=5]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Static_map" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Static_map"]
+
+[node name="TextureRect" type="TextureRect" parent="Static_map/ParallaxBackground"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Static_map"]
+visible = false
+color = Color( 0.152941, 0.356863, 0.290196, 1 )
+
+[node name="TileMap" type="TileMap" parent="Static_map"]
+position = Vector2( 0, 1 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_layer = 2
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 4521977, 0, 262145, 4521978, 0, 262146, 4521979, 0, 262146, 4521980, 0, 262146, 4521981, 0, 262146, 4521982, 0, 262147 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Static_map"]
+stream = ExtResource( 2 )
+volume_db = -2.5
+pitch_scale = 0.9
+mix_target = 1
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="Objects"]
+
+[node name="ModNodes" type="Node2D" parent="Objects"]
+
+[node name="LevelObjects" type="Node2D" parent="Objects"]
+
+[node name="Player" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( 312, 216 )

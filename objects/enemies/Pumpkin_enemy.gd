@@ -12,6 +12,7 @@ func _ready():
 
 
 func _process(delta):
+    closest_player=Globals.get_closest_player(position)
     if OS.get_system_time_secs() >= timers["respawn_timer"]:
         $AnimatedSprite.play("poof_out")
         timers["respawn_timer"] = OS.get_system_time_secs()+900
@@ -20,7 +21,7 @@ func _process(delta):
         $AnimatedSprite.play("poof_in")
         timers["poof_timer"] = OS.get_system_time_secs()+900
 
-    velocity = (Globals.player_node.position-position).normalized()
+    velocity = (closest_player.position-position).normalized()
 
     velocity = move_and_slide(velocity*movement_speed)
 

@@ -1,25 +1,26 @@
 extends Entity
 
-const JUMP_POWER:int = 300
+const JUMP_POWER:int = 325
 var should_jump:bool = false
 var timers:Dictionary = {"jump_timer":0}
 var velocity:Vector2
 
 func _process(delta):
-    if abs(position.length()-Globals.player_node.position.length())<500:
+    closest_player=Globals.get_closest_player(position)
+    if abs(position.length()-closest_player.position.length())<500:
 
         if velocity.y<=3500:
             velocity.y += ENTITY_WEIGHT*Globals.gravity*delta
-        if abs(position.length()-Globals.player_node.position.length())<170 and timers["jump_timer"]<=OS.get_system_time_secs():
+        if abs(position.length()-closest_player.position.length())<170 and timers["jump_timer"]<=OS.get_system_time_secs():
             should_jump = true
         
         velocity.x -= delta
         if abs(velocity.x)<1:
             velocity.x = 0
-        if Globals.player_node.position.x > position.x+15:
+        if closest_player.position.x > position.x+15:
             $AnimatedSprite.flip_h=true
             velocity.x = 1*movement_speed
-        elif Globals.player_node.position.x < position.x-15:
+        elif closest_player.position.x < position.x-15:
             $AnimatedSprite.flip_h=false
             velocity.x = -1*movement_speed
 

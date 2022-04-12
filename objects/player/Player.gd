@@ -30,7 +30,7 @@ func _ready():
         $AnimatedSprite.play("player_2")
         $PlayerUI_canvas/PlayerUI_controle/HPbar.modulate.g=1.4
         Globals.player_node.get_node("PlayerUI_canvas/PlayerUI_controle/HPbar").modulate = Color(1.0,0.7,1.1,1.0)
-        $PlayerUI_canvas/PlayerUI_controle/HPbar.margin_top+=30
+        $PlayerUI_canvas/PlayerUI_controle/HPbar.margin_top+=26
     ENTITY_WEIGHT=90
     hp = 1000
     max_hp = hp

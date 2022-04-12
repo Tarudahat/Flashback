@@ -1,6 +1,7 @@
 extends Sprite
 
 export var distination:int = 0#the level it wil bring you to
+export var need_orb:bool = true
 var player_in_range:bool = false
 
 func _on_Area2D_body_entered(body):
@@ -16,6 +17,9 @@ func _on_Area2D_body_exited(body):
 
 func _process(_delta):
     if Input.is_action_just_pressed("in_interact") and player_in_range:
-        if "Orb" in Globals.player_node.inventory:
-            if Globals.player_node.inventory["Orb"]==Globals.current_level.max_orbs:
-                print(get_tree().change_scene("res://levels/level_"+str(distination)+".tscn"))
+        if need_orb:
+            if "Orb" in Globals.player_node.inventory:
+                if Globals.player_node.inventory["Orb"]==Globals.current_level.max_orbs:
+                    print(get_tree().change_scene("res://levels/level_"+str(distination)+".tscn"))
+        else:
+            print(get_tree().change_scene("res://levels/level_"+str(distination)+".tscn"))

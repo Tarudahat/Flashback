@@ -12,6 +12,7 @@ export var ENTITY_WEIGHT:int = 75
 enum ENTITY_TYPES {PLAYER,ENEMY,OBJECT}
 export(ENTITY_TYPES) var ENTITY_TYPE
 
+var closest_player:Node
 var max_hp:int = hp
 
 var prev_hp:int = hp
@@ -28,8 +29,9 @@ func damage(dmg_amount,respect_knockback):
             material.set_shader_param("should_flicker", true)
         if (self.name==Globals.player_node.name and Globals.player_node.blast_power!=0 or Globals.player_node.rewinding==true):
             material.set_shader_param("should_flicker", false)
-        if (self.name==Globals.player_node2.name and Globals.player_node2.blast_power!=0 or Globals.player_node2.rewinding==true):
-            material.set_shader_param("should_flicker", false)
+        if Globals.co_op:
+            if (self.name==Globals.player_node2.name and Globals.player_node2.blast_power!=0 or Globals.player_node2.rewinding==true):
+                material.set_shader_param("should_flicker", false)
             
         hp-=dmg_amount
         

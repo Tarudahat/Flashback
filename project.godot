@@ -19,21 +19,33 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://levels/level_node.gd"
 }, {
+"base": "Light2D",
+"class": "Light2D_auto",
+"language": "GDScript",
+"path": "res://misc/Better_light2d.gd"
+}, {
 "base": "Node2D",
 "class": "RangeSpawner",
 "language": "GDScript",
 "path": "res://objects/ranged_spawner.gd"
+}, {
+"base": "Level",
+"class": "SkyLevel",
+"language": "GDScript",
+"path": "res://levels/level_themes/Level_theme_sky.gd"
 } ]
 _global_script_class_icons={
 "Entity": "",
 "Level": "",
-"RangeSpawner": ""
+"Light2D_auto": "",
+"RangeSpawner": "",
+"SkyLevel": ""
 }
 
 [application]
 
 config/name="Flashback"
-run/main_scene="res://levels/level_2.tscn"
+run/main_scene="res://levels/level_3.tscn"
 config/icon="res://icon.png"
 
 [autoload]

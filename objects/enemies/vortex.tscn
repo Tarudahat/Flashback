@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/objects/vortex.png" type="Texture" id=1]
+[ext_resource path="res://objects/enemies/vortex.gd" type="Script" id=2]
+[ext_resource path="res://assets/objects/light.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 32.0
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.156863, 0.737255, 0.329412, 1, 0, 0.811765, 1, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 30.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.08
+angular_velocity = 20.0
+angular_velocity_random = 0.59
+orbit_velocity = 1.0
+orbit_velocity_random = 0.22
+linear_accel = 40.0
+linear_accel_random = 1.0
+radial_accel = 5.0
+radial_accel_random = 1.0
+scale = 2.0
+scale_random = 1.0
+color_ramp = SubResource( 6 )
+
+[node name="suck_in" type="Node2D"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.784314 )
+texture = ExtResource( 1 )
+flip_h = true
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 10
+lifetime = 0.5
+process_material = SubResource( 7 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 0.8
+color = Color( 0.282353, 0.780392, 0.290196, 1 )
+energy = 0.8
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
