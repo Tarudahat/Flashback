@@ -50,14 +50,13 @@ height = 10.0
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
-hp = 150
+hp = 200
 movement_speed = 100
 ENTITY_TYPE = 1
 
 [node name="body_sprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 frames = SubResource( 4 )
-frame = 2
 playing = true
 
 [node name="eye_sprite" type="AnimatedSprite" parent="."]

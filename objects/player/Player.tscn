@@ -61,6 +61,7 @@ knock_back = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 frames = SubResource( 5 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -71,6 +72,7 @@ limit_smoothed = true
 [node name="PlayerUI_canvas" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI_controle" type="Control" parent="PlayerUI_canvas"]
+visible = false
 margin_top = -5.0
 margin_right = 40.0
 margin_bottom = 35.0

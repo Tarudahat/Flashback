@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/level_objects/switch.gd" type="Script" id=1]
 [ext_resource path="res://assets/objects/switch.png" type="Texture" id=2]
 [ext_resource path="res://assets/objects/light.png" type="Texture" id=3]
+[ext_resource path="res://misc/Better_light2d.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.446, 16.1486 )
@@ -25,3 +26,4 @@ texture_scale = 0.8
 color = Color( 1, 0.384314, 0.145098, 1 )
 energy = 0.8
 mode = 2
+script = ExtResource( 4 )

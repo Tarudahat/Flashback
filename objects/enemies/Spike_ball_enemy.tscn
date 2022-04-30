@@ -3,8 +3,8 @@
 [ext_resource path="res://objects/enemies/dmg_on_hit.gd" type="Script" id=1]
 [ext_resource path="res://assets/objects/spike_ball.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
 
 [node name="Spike_ball_enemy" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
@@ -12,6 +12,7 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource( 1 )
 immortal = true
+ENTITY_WEIGHT = 500
 ENTITY_TYPE = 1
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -21,6 +22,6 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.5
 autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

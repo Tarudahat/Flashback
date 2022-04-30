@@ -10,6 +10,12 @@ export var inverted_open:bool = false
 export var movement_speed:int = 450
 var velocity:Vector2
 onready var start_x:float = position.x
+var sky_door:Texture = preload("res://assets/objects/door_wind.png")
+export var use_wind_sprite:bool = false
+
+func _ready():
+    if use_wind_sprite:
+        $Sprite.texture = sky_door
 
 func _process(_delta):
     velocity=Vector2(0,0)

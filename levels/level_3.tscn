@@ -1,13 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/tileset/rocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/tileset/backdrop2.png" type="Texture" id=2]
 [ext_resource path="res://assets/sound/BGM/slow_dark_drum.wav" type="AudioStream" id=3]
 [ext_resource path="res://levels/level_themes/Level_theme_sky.gd" type="Script" id=4]
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/enemies/blow_cloud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/Timed_spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/level_objects/switch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/level_objects/Item.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/level_objects/door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/level_objects/Gate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/level_objects/blast_reflector.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/ranged_spawner.gd" type="Script" id=13]
+[ext_resource path="res://objects/level_objects/Sign.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/enemies/Air_current.tscn" type="PackedScene" id=15]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 4 )
@@ -37,12 +44,11 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 collision_layer = 2
 collision_mask = 3
 format = 1
-tile_data = PoolIntArray( 65546, 0, 262145, 65547, 0, 262147, 262142, 0, 1, 262143, 0, 2, 196614, 0, 262145, 196615, 0, 262147, 327678, 0, 65537, 327679, 0, 131080, 262144, 0, 2, 393214, 0, 262144, 393215, 0, 196615, 327680, 0, 131080, 327681, 0, 3, 327682, 0, 262147, 458751, 0, 262144, 393216, 0, 196608, 393217, 0, 196610, 458757, 0, 131072, 458760, 0, 131072, 524293, 0, 131074, 524296, 0, 131074, 589836, 0, 262145, 589837, 0, 262146, 589838, 0, 262147, 720898, 0, 262145, 720899, 0, 262146, 720900, 0, 262147, 720913, 0, 262145, 720914, 0, 262147, 851983, 0, 196609, 917518, 0, 196609, 1048582, 0, 1, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 2, 1114118, 0, 262144, 1114119, 0, 196615, 1114120, 0, 65536, 1114121, 0, 65536, 1114122, 0, 65536, 1114123, 0, 196616, 1114124, 0, 196610, 1179655, 0, 262144, 1179656, 0, 196608, 1179657, 0, 196608, 1179658, 0, 196608, 1179659, 0, 196610, 2424825, 0, 262145, 2424826, 0, 262146, 2424827, 0, 262146, 2424828, 0, 262146, 2424829, 0, 262146, 2424830, 0, 262147 )
+tile_data = PoolIntArray( -1638394, 0, 262145, -1638393, 0, 262147, -1507325, 0, 262145, -1507324, 0, 262147, -1441786, 0, 262145, -1441785, 0, 262148, -1441784, 0, 0, -1441783, 0, 0, -1441782, 0, 0, -1441781, 0, 0, -1441780, 0, 0, -1441779, 0, 0, -1441778, 0, 3, -1441777, 0, 262147, -1376255, 0, 196609, -1376249, 0, 262144, -1376248, 0, 262151, -1376247, 0, 196608, -1376246, 0, 196615, -1376245, 0, 65536, -1376244, 0, 65536, -1376243, 0, 196616, -1376242, 0, 196610, -1310720, 0, 196609, -1310712, 0, 131074, -1310710, 0, 131078, -1310709, 0, 196608, -1310708, 0, 196615, -1310707, 0, 65538, -1310696, 0, 262145, -1310695, 0, 262148, -1310694, 0, 0, -1310693, 0, 0, -1310692, 0, 0, -1310691, 0, 2, -1245174, 0, 131074, -1245172, 0, 131078, -1245171, 0, 196610, -1245159, 0, 65537, -1245158, 0, 65536, -1245157, 0, 65536, -1245156, 0, 196616, -1245155, 0, 196610, -1114116, 0, 262145, -1114115, 0, 262147, -1179636, 0, 131074, -1179623, 0, 262144, -1179622, 0, 196615, -1179621, 0, 196616, -1179620, 0, 196610, -1114098, 0, 131076, -1114097, 0, 262147, -1114086, 0, 262144, -1114085, 0, 6, -983048, 0, 131072, -1048562, 0, 131073, -1048549, 0, 131074, -917512, 0, 65540, -917511, 0, 262148, -917510, 0, 2, -983026, 0, 131074, -851975, 0, 131078, -851974, 0, 196610, -917489, 0, 262145, -917488, 0, 262146, -917487, 0, 262147, -786439, 0, 131074, -786434, 0, 1, -786433, 0, 0, -851968, 0, 2, -720899, 0, 1, -720898, 0, 131079, -720897, 0, 65536, -786432, 0, 65538, -655363, 0, 65537, -655362, 0, 65536, -655361, 0, 65536, -720896, 0, 131080, -720895, 0, 2, -720892, 0, 1, -720891, 0, 0, -720890, 0, 0, -720889, 0, 0, -720888, 0, 0, -720887, 0, 2, -589827, 0, 65537, -589826, 0, 65536, -589825, 0, 65536, -655360, 0, 65536, -655359, 0, 131080, -655358, 0, 0, -655357, 0, 0, -655356, 0, 131079, -655355, 0, 65536, -655354, 0, 65536, -655353, 0, 65536, -655352, 0, 196616, -655351, 0, 65541, -655350, 0, 262147, -655346, 0, 262145, -655345, 0, 262148, -655344, 0, 0, -655343, 0, 0, -655342, 0, 0, -655341, 0, 3, -655340, 0, 262147, -524291, 0, 65537, -524290, 0, 65536, -524289, 0, 65536, -589824, 0, 65536, -589823, 0, 65536, -589822, 0, 65536, -589821, 0, 65536, -589820, 0, 65536, -589819, 0, 196616, -589818, 0, 196608, -589817, 0, 262151, -589816, 0, 196610, -589809, 0, 262144, -589808, 0, 262151, -589807, 0, 196608, -589806, 0, 262151, -589805, 0, 196610, -589801, 0, 262145, -589800, 0, 131075, -458755, 0, 262144, -458754, 0, 262151, -458753, 0, 196608, -524288, 0, 196615, -524287, 0, 65536, -524286, 0, 65536, -524285, 0, 65536, -524284, 0, 196616, -524283, 0, 196610, -524281, 0, 131074, -524272, 0, 131073, -524270, 0, 131074, -524264, 0, 65540, -524263, 0, 262147, -393218, 0, 131074, -458752, 0, 262144, -458751, 0, 196608, -458750, 0, 196615, -458749, 0, 196616, -458748, 0, 196610, -458736, 0, 131074, -458725, 0, 196609, -393214, 0, 262144, -393213, 0, 6, -393186, 0, 131072, -327677, 0, 131074, -327651, 0, 262145, -327650, 0, 65539, -196582, 0, 1, -196581, 0, 2, -131046, 0, 65537, -131045, 0, 65538, -65523, 0, 262145, -65522, 0, 196613, -65521, 0, 262146, -65520, 0, 262148, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0, -65510, 0, 131079, -65509, 0, 65538, 14, 0, 131074, 16, 0, 65537, 17, 0, 196616, 18, 0, 196608, 19, 0, 196615, 20, 0, 65536, 21, 0, 65536, 22, 0, 65536, 23, 0, 65536, 24, 0, 65536, 25, 0, 65536, 26, 0, 196616, 27, 0, 196610, 65546, 0, 262145, 65547, 0, 262147, 65552, 0, 262144, 65553, 0, 6, 65555, 0, 65537, 65556, 0, 196616, 65557, 0, 196608, 65558, 0, 196615, 65559, 0, 65536, 65560, 0, 65536, 65561, 0, 196616, 65562, 0, 196610, 131089, 0, 131074, 131091, 0, 131078, 131092, 0, 196610, 131094, 0, 262144, 131095, 0, 196615, 131096, 0, 196616, 131097, 0, 196610, 262142, 0, 1, 262143, 0, 2, 196614, 0, 262145, 196615, 0, 262147, 196627, 0, 131074, 196631, 0, 131078, 196632, 0, 196610, 327678, 0, 65537, 327679, 0, 131080, 262144, 0, 2, 262167, 0, 131074, 393214, 0, 262144, 393215, 0, 196615, 327680, 0, 131080, 327681, 0, 3, 327682, 0, 262147, 458751, 0, 262144, 393216, 0, 196608, 393217, 0, 196610, 458757, 0, 131072, 458760, 0, 131072, 524293, 0, 131074, 524296, 0, 131074, 589836, 0, 262145, 589837, 0, 262146, 589838, 0, 262147, 720898, 0, 262145, 720899, 0, 262146, 720900, 0, 262147, 720913, 0, 262145, 720914, 0, 262147, 851983, 0, 196609, 917518, 0, 196609, 1048582, 0, 1, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 2, 1114118, 0, 262144, 1114119, 0, 196615, 1114120, 0, 65536, 1114121, 0, 65536, 1114122, 0, 65536, 1114123, 0, 196616, 1114124, 0, 196610, 1179655, 0, 262144, 1179656, 0, 196608, 1179657, 0, 196608, 1179658, 0, 196608, 1179659, 0, 196610, 2424825, 0, 262145, 2424826, 0, 262146, 2424827, 0, 262146, 2424828, 0, 262146, 2424829, 0, 262146, 2424830, 0, 262147 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Static_map"]
 stream = ExtResource( 3 )
-volume_db = -2.5
-pitch_scale = 0.9
+pitch_scale = 4.0
 mix_target = 1
 
 [node name="Objects" type="Node2D" parent="."]
@@ -56,12 +62,50 @@ range_ = 300
 use_path = true
 object_path = "res://objects/enemies/cloud_enemy.tscn"
 
+[node name="RangeSpawner3" type="Node2D" parent="Objects/Enemies"]
+position = Vector2( 88, -608 )
+script = ExtResource( 13 )
+range_ = 400
+use_path = true
+object_path = "res://objects/enemies/cloud_enemy.tscn"
+
+[node name="RangeSpawner4" type="Node2D" parent="Objects/Enemies"]
+position = Vector2( -80, -512 )
+script = ExtResource( 13 )
+range_ = 400
+use_path = true
+object_path = "res://objects/enemies/cloud_enemy.tscn"
+
 [node name="RangeSpawner2" type="Node2D" parent="Objects/Enemies"]
 position = Vector2( 24, 24 )
 script = ExtResource( 13 )
 range_ = 420
 use_path = true
 object_path = "res://objects/enemies/cloud_enemy.tscn"
+
+[node name="Blow_cloud_enemy" parent="Objects/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 800, -64 )
+
+[node name="timed_spawner" parent="Objects/Enemies/Blow_cloud_enemy" instance=ExtResource( 7 )]
+position = Vector2( -56, 0 )
+use_path = true
+object_path = "res://objects/enemies/Spike_ball_enemy.tscn"
+
+[node name="Blow_cloud_enemy2" parent="Objects/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 224, -736 )
+scale = Vector2( -1, 1 )
+
+[node name="Blow_cloud_enemy2" parent="Objects/Enemies/Blow_cloud_enemy2" instance=ExtResource( 15 )]
+visible = false
+position = Vector2( -192, 8 )
+scale = Vector2( -1.3, 1 )
+blow_power = 4.0
+
+[node name="Blow_cloud_enemy3" parent="Objects/Enemies/Blow_cloud_enemy2" instance=ExtResource( 15 )]
+visible = false
+position = Vector2( -312, -32 )
+scale = Vector2( -1.2, 1.3 )
+blow_power = 3.0
 
 [node name="ModNodes" type="Node2D" parent="Objects"]
 position = Vector2( 0, -1 )
@@ -73,10 +117,29 @@ position = Vector2( 0, 1 )
 position = Vector2( -128, 1088 )
 need_orb = false
 
+[node name="Switch" parent="Objects/ModNodes/Level_objects" instance=ExtResource( 8 )]
+position = Vector2( 512, -464 )
+
+[node name="Door" parent="Objects/ModNodes/Level_objects/Switch" instance=ExtResource( 10 )]
+position = Vector2( 48, 96 )
+use_wind_sprite = true
+
+[node name="Reflector" parent="Objects/ModNodes/Level_objects" instance=ExtResource( 12 )]
+position = Vector2( 632, -528 )
+rotation = 3.73151
+
+[node name="Sign" parent="Objects/ModNodes/Level_objects" instance=ExtResource( 14 )]
+position = Vector2( 344, 480 )
+use_conv_sqc = true
+conv_sqc_path = "res://assets/conversations/sign_tutorial.json"
+
 [node name="Player" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( 216, 472 )
+position = Vector2( 280, 488 )
 
 [node name="Items" type="Node2D" parent="Objects"]
 
 [node name="Item" parent="Objects/Items" instance=ExtResource( 9 )]
 position = Vector2( 112, 312 )
+
+[node name="Item2" parent="Objects/Items" instance=ExtResource( 9 )]
+position = Vector2( -96, -616 )
